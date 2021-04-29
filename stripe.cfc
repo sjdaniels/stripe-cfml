@@ -78,6 +78,9 @@ component {
         // headers
         var headerData = parsers.headers.parse( sources.headers, methodMetadata );
         ignoredArgs.append( headerData.headerArgNames, true );
+        // workaround for https://github.com/jcberquist/stripe-cfml/issues/37
+        // for now allow api_version param to pass through to request body
+        ignoredArgs.delete("api_version");
 
         // params
         var params = parsers.arguments.parse( sources.params, methodMetadata.arguments, ignoredArgs );
